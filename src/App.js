@@ -1,20 +1,64 @@
 import React, { Component } from 'react';
 import './App.css';
 import Container from './components/Container/Container';
+import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
+import Statistics from './components/Statistics/Statistics';
+import Section from './components/Section/Section';
+import Notification from './components/Notification/Notification';
 
-export default class App extends Component() {
+export default class App extends Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
 
-  render() {
-    return (
-      <Container className="Container">
-        {/* <FeedbackOptions options={} onLeaveFeedback={}></FeedbackOptions> */}
+  onLeaveFeedback = assessment => {
+    this.setState(prevState => {
+      return { [assessment]: prevState[assessment] + 1 };
+    });
+  };
 
-        {/* <Statistics good={} neutral={} bad={} total={} positivePercentage={}></Statistics> */}
+  countTotalFeedback = () => {
+    return Object.values(this.state).reduce((acc, value) => acc + value, 0);
+  };
+
+  countPositiveFeedbackPercentage = (total, positiveFeedback) => {
+    const positivePersent = ((positiveFeedback / total) * 100).toFixed(0);
+    if (positivePersent === 'NaN') {
+      return 0;
+    }
+    return `${positivePersent}%`;
+  };
+
+  render() {
+    const total = this.countTotalFeedback();
+    const positiveFeedback = this.countPositiveFeedbackPercentage(
+      total,
+      this.state.good,
+    );
+    return (
+      <Container>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={this.state}
+            onLeaveFeedback={this.onLeaveFeedback}
+          />
+        </Section>
+
+        <Section title="Statistic">
+          {total === 0 ? (
+            <Notification message="No feedback given" />
+          ) : (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={total}
+              positivePercentage={positiveFeedback}
+            />
+          )}
+        </Section>
       </Container>
     );
   }
