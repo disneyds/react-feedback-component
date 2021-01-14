@@ -48,7 +48,7 @@ export default class App extends Component {
 
         <Section title="Отзывы клиентов">
           {total === 0 ? (
-            <Notification message="Тут пока пусто :(" />
+            <Notification message="Тут пока пусто" />
           ) : (
             <Statistics
               good={this.state.good}
