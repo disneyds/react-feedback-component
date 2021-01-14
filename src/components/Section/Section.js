@@ -1,10 +1,10 @@
 import s from './Section.module.css';
 
-export default function Section(props) {
+export default function Section({ title, children }) {
   return (
     <div className={s.section}>
-      <h2>{props.title}</h2>
-      {props.children}
+      <h2 className={s.title}>{title}</h2>
+      {children}
     </div>
   );
 }

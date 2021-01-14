@@ -1,4 +1,4 @@
-import React from 'react';
+import s from './Statistics.module.css';
 
 export default function Statistics({
   good,
@@ -8,12 +8,30 @@ export default function Statistics({
   positivePercentage,
 }) {
   return (
-    <div>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>Total: {total}</p>
-      <p>Positive Feedback: {positivePercentage}</p>
+    <div className={s.stats}>
+      <div className={s.votes}>
+        <p className={s.vote}>Отлично: {good}</p>
+        <p className={s.vote}>Неплохо: {neutral}</p>
+        <p className={s.vote}>Ужасно: {bad}</p>
+      </div>
+      <div className={s.total}>
+        <p>Общее колличество отзывов: {total}</p>
+        <p>из них {positivePercentage} положительных</p>
+        {Number.parseInt(positivePercentage) <= 33 && (
+          <p className={s.emoji}>&#128530;</p>
+        )}
+        {Number.parseInt(positivePercentage) > 33 &&
+          Number.parseInt(positivePercentage) < 66 && (
+            <p className={s.emoji}>&#128528;</p>
+          )}
+        {Number.parseInt(positivePercentage) >= 66 &&
+          Number.parseInt(positivePercentage) <= 90 && (
+            <p className={s.emoji}>&#128526;</p>
+          )}
+        {Number.parseInt(positivePercentage) > 90 && (
+          <p className={s.emoji}>&#128525;</p>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,43 @@
+.buttonList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.button {
+  font-family: 'Lobster';
+  font-size: 20px;
+  min-width: 120px;
+  min-height: 30px;
+  border: 2px solid aliceblue;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button:not(:last-child) {
+  margin-right: 20px;
+}
+
+.good,
+.normal,
+.bad {
+  composes: button;
+}
+
+.good:hover,
+.good:focus {
+  background-color: rgba(0, 128, 0, 0.514);
+  border: transparent;
+}
+.normal:hover,
+.normal:focus {
+  background-color: rgba(255, 255, 0, 0.589);
+  border: transparent;
+}
+.bad:hover,
+.bad:focus {
+  background-color: rgba(255, 0, 0, 0.473);
+  border: transparent;
+}

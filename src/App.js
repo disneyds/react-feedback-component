@@ -39,16 +39,16 @@ export default class App extends Component {
     );
     return (
       <Container>
-        <Section title="Please leave feedback">
+        <Section title="Пожалуйста оставьте отзыв!">
           <FeedbackOptions
             options={this.state}
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
 
-        <Section title="Statistic">
+        <Section title="Отзывы клиентов">
           {total === 0 ? (
-            <Notification message="No feedback given" />
+            <Notification message="Тут пока пусто :(" />
           ) : (
             <Statistics
               good={this.state.good}
