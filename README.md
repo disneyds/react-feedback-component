@@ -1,1 +1,1 @@
-# goit-react-hw-02-feedback
+# react-feedback-component
